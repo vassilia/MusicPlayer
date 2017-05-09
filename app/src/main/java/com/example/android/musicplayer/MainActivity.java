@@ -31,81 +31,27 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setMax((int) finalTime);
         seekBar.setClickable(false);
 
-        TextView numbers = (TextView) findViewById(R.id.albums);
-
-        // Set a click listener on that View
-        numbers.setOnClickListener(new View.OnClickListener() {
-            // The code in this method will be executed when the numbers category is clicked on.
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link NumbersActivity}
-                Intent albumsIntent = new Intent(MainActivity.this, AlbumsActivity.class);
-
-                // Start the new activity
-                startActivity(albumsIntent);
-            }
-        });
-        TextView artists = (TextView) findViewById(R.id.artists);
-
-        // Set a click listener on that View
-        numbers.setOnClickListener(new View.OnClickListener() {
-            // The code in this method will be executed when the numbers category is clicked on.
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link NumbersActivity}
-                Intent artistsIntent = new Intent(MainActivity.this, ArtistsActivity.class);
-
-                // Start the new activity
-                startActivity(artistsIntent);
-            }
-        });
-
-        TextView playlists = (TextView) findViewById(R.id.playlists);
-
-        // Set a click listener on that View
-        numbers.setOnClickListener(new View.OnClickListener() {
-            // The code in this method will be executed when the numbers category is clicked on.
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link NumbersActivity}
-                Intent playlistsIntent = new Intent(MainActivity.this, PlaylistsActivity.class);
-
-                // Start the new activity
-                startActivity(playlistsIntent);
-            }
-        });
-
-        TextView songs = (TextView) findViewById(R.id.songs);
-
-        // Set a click listener on that View
-        numbers.setOnClickListener(new View.OnClickListener() {
-            // The code in this method will be executed when the numbers category is clicked on.
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link NumbersActivity}
-                Intent songsIntent = new Intent(MainActivity.this, SongsActivity.class);
-
-                // Start the new activity
-                startActivity(songsIntent);
-            }
-        });
 
 
-        private Runnable updateSeekBarTime = new Runnable() {
-            public void run() {
-                timeStart = mediaPlayer.getCurrentPosition();
-                seekBar.setProgress((int) timeStart);
-                double timeRemaining = finalTime - timeStart;
-                songDuration.setText(String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes((long) timeRemaining), TimeUnit.MILLISECONDS.toSeconds((long) timeRemaining) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) timeRemaining))));
-                durationHandler.postDelayed(this, 100);
-            }
-        };
+
+
+
+    }
+
+    private Runnable updateSeekBarTime = new Runnable() {
+        public void run() {
+            timeStart = mediaPlayer.getCurrentPosition();
+            seekBar.setProgress((int) timeStart);
+            double timeRemaining = finalTime - timeStart;
+            songDuration.setText(String.format("%d min, %d sec", TimeUnit.MILLISECONDS.toMinutes((long) timeRemaining), TimeUnit.MILLISECONDS.toSeconds((long) timeRemaining) - TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long) timeRemaining))));
+            durationHandler.postDelayed(this, 100);
+        }
+    };
 
     public void play(View view) {
         mediaPlayer.start();
         timeStart = mediaPlayer.getCurrentPosition();
         seekBar.setProgress((int) timeStart);
-        Runnable updateSeekBarTime;
         durationHandler.postDelayed(updateSeekBarTime, 100);
     }
 
@@ -126,8 +72,6 @@ public class MainActivity extends AppCompatActivity {
             timeStart = timeStart - backwardTime;
             mediaPlayer.seekTo((int) timeStart);
         }
+
     }
-
-
-}
 }
