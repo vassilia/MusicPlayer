@@ -1,3 +1,14 @@
 <resources>
     <string name="app_name">MusicPlayer</string>
+    <string name="title">SONG NAME</string>
+    <string name="duration">SONG DURATION</string>
+    <string name="albums">ALBUMS</string>
+    <string name="songs">SONGS</string>
+    <string name="artists">ARTISTS</string>
+    <string name="playlists">PLAYLISTS</string>
+    <string name="albums_activity">this is an activity that would display all albums that are in the users library</string>
+    <string name="artists_activity">this is an activity that would display all artists that are in the users library</string>
+    <string name="playlists_activity">this is an activity that would display all playlists that the user creates</string>
+    <string name="songs_activity">this is an activity that would display all songs that the user has in his/her library</string>
 </resources>
+

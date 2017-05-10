@@ -18,72 +18,7 @@ public class MainActivity extends AppCompatActivity {
     private double timeStart = 0, finalTime = 0;
     private int forwardTime = 2000, backwardTime = 2000;
     private Handler durationHandler = new Handler();
-
-    @Override
-    protected void onCreate(Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
-        songName = (TextView) findViewById(R.id.songName);
-        songDuration = (TextView) findViewById(R.id.songDuration);
-        mediaPlayer = MediaPlayer.create(this, R.raw.song);
-        seekBar = (SeekBar) findViewById(R.id.seekBar);
-        songName.setText("Song.mp3");
-        seekBar.setMax((int) finalTime);
-        seekBar.setClickable(false);
-
-
-        TextView albums = (TextView) findViewById(R.id.albums);
-        albums.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link AlbumsActivity}
-                Intent albumsIntent = new Intent(MainActivity.this, AlbumsActivity.class);
-
-                // Start the new activity
-                startActivity(albumsIntent);
-            }
-        });
-
-
-        TextView playlists = (TextView) findViewById(R.id.playlists);
-        albums.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link ArtistsActivity}
-                Intent playlistsIntent = new Intent(MainActivity.this, PlaylistsActivity.class);
-
-                // Start the new activity
-                startActivity(playlistsIntent);
-            }
-        });
-
-        TextView artists = (TextView) findViewById(R.id.artists);
-        albums.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link ArtistsActivity}
-                Intent artistsIntent = new Intent(MainActivity.this, ArtistsActivity.class);
-
-                // Start the new activity
-                startActivity(artistsIntent);
-            }
-        });
-        TextView songs = (TextView) findViewById(R.id.songs);
-        albums.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                // Create a new intent to open the {@link ArtistsActivity}
-                Intent songsIntent = new Intent(MainActivity.this, SongsActivity.class);
-
-                // Start the new activity
-                startActivity(songsIntent);
-            }
-        });
-
-
-    }
-
-
+    //methods for seekBar in the player
     private Runnable updateSeekBarTime = new Runnable() {
         public void run() {
             timeStart = mediaPlayer.getCurrentPosition();
@@ -94,13 +29,62 @@ public class MainActivity extends AppCompatActivity {
         }
     };
 
+    @Override
+    protected void onCreate(Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        setContentView(R.layout.activity_main);
+        // I added the media player
+        songName = (TextView) findViewById(R.id.songName);
+        songDuration = (TextView) findViewById(R.id.songDuration);
+        mediaPlayer = MediaPlayer.create(this, R.raw.song);
+        seekBar = (SeekBar) findViewById(R.id.seekBar);
+        songName.setText("Song.mp3");
+        seekBar.setMax((int) finalTime);
+        seekBar.setClickable(false);
+        // I define the onClickListener for albums activity
+        TextView albums = (TextView) findViewById(R.id.albums);
+        albums.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent albumsIntent = new Intent(MainActivity.this, AlbumsActivity.class);
+                startActivity(albumsIntent);
+            }
+        });
+        // I define the onClickListener for playlists activity
+        TextView playlists = (TextView) findViewById(R.id.playlists);
+        playlists.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent playlistsIntent = new Intent(MainActivity.this, PlaylistsActivity.class);
+                startActivity(playlistsIntent);
+            }
+        });
+        // I define the onClickListener for artists activity
+        TextView artists = (TextView) findViewById(R.id.artists);
+        artists.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent artistsIntent = new Intent(MainActivity.this, ArtistsActivity.class);
+                startActivity(artistsIntent);
+            }
+        });
+        // I define the onClickListener for songs activity
+        TextView songs = (TextView) findViewById(R.id.songs);
+        songs.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent songsIntent = new Intent(MainActivity.this, SongsActivity.class);
+                startActivity(songsIntent);
+            }
+        });
+    }
+
     public void play(View view) {
         mediaPlayer.start();
         timeStart = mediaPlayer.getCurrentPosition();
         seekBar.setProgress((int) timeStart);
         durationHandler.postDelayed(updateSeekBarTime, 100);
     }
-
     public void pause(View view) {
         mediaPlayer.pause();
     }
@@ -111,13 +95,11 @@ public class MainActivity extends AppCompatActivity {
             mediaPlayer.seekTo((int) timeStart);
         }
     }
-
     public void backforward(View view) {
         //check if we can go back at backwardTime seconds after song starts
         if ((timeStart - backwardTime) > 0) {
             timeStart = timeStart - backwardTime;
             mediaPlayer.seekTo((int) timeStart);
         }
-
     }
 }
