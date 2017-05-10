@@ -32,11 +32,57 @@ public class MainActivity extends AppCompatActivity {
         seekBar.setClickable(false);
 
 
+        TextView albums = (TextView) findViewById(R.id.albums);
+        albums.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new intent to open the {@link AlbumsActivity}
+                Intent albumsIntent = new Intent(MainActivity.this, AlbumsActivity.class);
+
+                // Start the new activity
+                startActivity(albumsIntent);
+            }
+        });
 
 
+        TextView playlists = (TextView) findViewById(R.id.playlists);
+        albums.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new intent to open the {@link ArtistsActivity}
+                Intent playlistsIntent = new Intent(MainActivity.this, PlaylistsActivity.class);
+
+                // Start the new activity
+                startActivity(playlistsIntent);
+            }
+        });
+
+        TextView artists = (TextView) findViewById(R.id.artists);
+        albums.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new intent to open the {@link ArtistsActivity}
+                Intent artistsIntent = new Intent(MainActivity.this, ArtistsActivity.class);
+
+                // Start the new activity
+                startActivity(artistsIntent);
+            }
+        });
+        TextView songs = (TextView) findViewById(R.id.songs);
+        albums.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                // Create a new intent to open the {@link ArtistsActivity}
+                Intent songsIntent = new Intent(MainActivity.this, SongsActivity.class);
+
+                // Start the new activity
+                startActivity(songsIntent);
+            }
+        });
 
 
     }
+
 
     private Runnable updateSeekBarTime = new Runnable() {
         public void run() {
